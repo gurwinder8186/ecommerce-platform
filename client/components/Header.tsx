@@ -10,10 +10,10 @@ function Header() {
       <button> 🔍</button>
     </div>
     <div>
-      <Link to="/shop">Shop Now</Link>
-      <Link to="/register">Register</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/cart">Cart</Link>
+      <Link to="/shop">Shop Now </Link>
+      <Link to="/register"> Register </Link>
+      <Link to="/login"> Login </Link>
+      <Link to="/cart"> Cart </Link>
     </div>
   </header>
 
