@@ -9,3 +9,8 @@ export async function fetchCategories() {
     throw error; 
   }
 }
+
+export async function addCategory(category: { name: string; description?: string }) {
+  const response = await request.post('/api/v1/categories').send(category);
+  return response.body;
+}
