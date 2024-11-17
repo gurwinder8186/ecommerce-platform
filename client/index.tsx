@@ -3,14 +3,17 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import App from './components/App.tsx'
+import React from 'react'
 
 const queryClient = new QueryClient()
 
 document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
+    <React.StrictMode  >
     <QueryClientProvider client={queryClient}>
       <App />
       <ReactQueryDevtools />
     </QueryClientProvider>
+    </React.StrictMode>
   )
 })
