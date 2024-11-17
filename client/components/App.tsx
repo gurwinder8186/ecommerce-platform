@@ -1,15 +1,21 @@
-import { useFruits } from '../hooks/useFruits.ts'
+import { BrowserRouter } from 'react-router-dom'
+import Header from './Header.tsx'
+import Footer from './Footer.tsx'
+import Categories from './Categories.tsx'
 
 function App() {
-  const { data } = useFruits()
+  console.log(" app component rendred");
+  
 
   return (
-    <>
-      <div className="app">
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
+    <BrowserRouter>
+        <div className="app">
+        <Header />
+        <Categories />
+        <Footer />
       </div>
-    </>
+    </BrowserRouter>
+    
   )
 }
 
