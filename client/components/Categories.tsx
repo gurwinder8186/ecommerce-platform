@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useCategories, useAddCategory } from '../hooks/useCategories';
 import { Category } from '../../models/Category';
+import { Link } from 'react-router-dom';
 
 function Categories() {
   const { data: categories, isLoading, isError } = useCategories();
@@ -21,12 +22,16 @@ function Categories() {
 
   return (
     <div>
-      <h1>Categories</h1>
+      <aside>
+        <h3> Shop by Departments</h3>
       <ul>
         {categories?.map((category: Category) => (
-          <li key={category.id}>{category.name}</li>
+          <Link key={category.name} to={category.name}>
+          <li>{category.name}</li>
+        </Link>
         ))}
       </ul>
+      </aside>
       <div>
         <h2>Add Category</h2>
         <input
