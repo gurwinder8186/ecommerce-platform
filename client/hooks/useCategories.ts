@@ -3,7 +3,7 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query'
-import { addCategory, fetchCategories } from '../apis/productApi.ts'
+import { addCategory, fetchCategories, deleteCategoryById } from '../apis/productApi.ts'
 
 export function  useCategories() {
   const query = useQuery({ queryKey: ['categories'], queryFn: () => fetchCategories(), });
@@ -22,4 +22,20 @@ export function useAddCategory() {
   });
 
 }
+
+
+export function useDeleteCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: number) => deleteCategoryById(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+    },
+    onError: (error) => {
+      console.error('Error deleting category:', error);
+    },
+  });
+}
+
 
