@@ -16,7 +16,7 @@ function Categories() {
       <ul>
         {categories?.map((category: Category) => (
           <Link key={category.name} to={category.name}>
-          <li>{category.name}</li>
+          <li className='categories'>{category.name}</li>
         </Link>
         ))}
       </ul>

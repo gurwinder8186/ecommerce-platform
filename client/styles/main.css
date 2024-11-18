@@ -27,6 +27,9 @@ a  {
 a:hover {
   color: #000;
 }
+.categories:hover{
+  color:#409efc
+}
 
 header {
   display: flex;
