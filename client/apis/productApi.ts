@@ -28,7 +28,7 @@ export async function deleteCategoryById(id: number) {
 export async function updateCategory(category: { id: number; name: string; description?: string }) {
   const { id, ...payload } = category;
   try {
-    const res = await request.put(`/api/v1/categories/${id}`).send(payload);  // Assuming your route is correct
+    const res = await request.put(`/api/v1/categories/${id}`).send(payload); 
     return res.body;
   } catch (error) {
     console.error('Error updating category:', error);

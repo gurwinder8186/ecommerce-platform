@@ -1,23 +1,40 @@
+
 import { useState } from 'react';
-import { useUpdateCategory } from '../hooks/useCategories';  // Adjust the import path as needed
+import { useUpdateCategory, useDeleteCategory } from '../hooks/useCategories'; 
 import { Category } from '../../models/Category';
 
-interface UpdateCategoryProps {
+interface ManageCategoryProps {
   categories: Category[];
 }
 
-function UpdateCategory({ categories }: UpdateCategoryProps) {
+function ManageCategory({ categories }: ManageCategoryProps) {
   const updateCategory = useUpdateCategory();
+  const deleteCategory = useDeleteCategory();
+
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [updatedName, setUpdatedName] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
 
+  
+  function handleDelete(id: number) {
+    deleteCategory.mutate(id, {
+      onSuccess: () => {
+        console.log(`Category with ID ${id} deleted`);
+      },
+      onError: (error) => {
+        console.error('Failed to delete category:', error);
+      },
+    });
+  }
+
+ 
   function handleSelectCategory(category: Category) {
     setSelectedCategory(category);
     setUpdatedName(category.name);
     setUpdatedDescription(category.description || '');
   }
 
+ 
   function handleUpdate() {
     if (!selectedCategory) return;
 
@@ -39,17 +56,17 @@ function UpdateCategory({ categories }: UpdateCategoryProps) {
 
   return (
     <div>
-      <h3>Update Category</h3>
+      <h3>Manage Categories</h3>
       <ul>
         {categories.map((category) => (
           <li className="categoryList" key={category.id}>
-            {category.name}{' '}
-            <button
-              className="editButton"
-              onClick={() => handleSelectCategory(category)}
-            >
+            <button className="editButton" onClick={() => handleSelectCategory(category)}>
               Edit
+            </button>{' '}
+            <button className="deleteButton" onClick={() => handleDelete(category.id)}>
+              Delete
             </button>
+            <span>{category.name}</span>{' '}
           </li>
         ))}
       </ul>
@@ -72,10 +89,7 @@ function UpdateCategory({ categories }: UpdateCategoryProps) {
           <button className="updateButton" onClick={handleUpdate}>
             Update
           </button>
-          <button
-            className="cancelButton"
-            onClick={() => setSelectedCategory(null)}
-          >
+          <button className="cancelButton" onClick={() => setSelectedCategory(null)}>
             Cancel
           </button>
         </div>
@@ -84,4 +98,4 @@ function UpdateCategory({ categories }: UpdateCategoryProps) {
   );
 }
 
-export default UpdateCategory;
+export default ManageCategory;
