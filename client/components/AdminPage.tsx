@@ -1,6 +1,7 @@
 import { useCategories } from '../hooks/useCategories';
 import AddCategory from './AddCategory';
 import DeleteCategory from './DeleteCategory';
+import UpdateCategory from './UpdateCategory';
 
 function AdminPage() {
   const { data: categories, isLoading, isError } = useCategories();
@@ -12,7 +13,9 @@ function AdminPage() {
     <div>
       <h2>Admin Dashboard</h2>
       <AddCategory />
-      {categories && <DeleteCategory categories={categories} />}
+     
+      { <UpdateCategory categories={categories} />}
+      {<DeleteCategory categories={categories} />}
     </div>
   );
 }
