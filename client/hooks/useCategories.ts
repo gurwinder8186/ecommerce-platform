@@ -5,6 +5,7 @@ import {
   deleteCategoryById,
   updateCategory,
 } from '../apis/productApi.ts'
+import { DesktopPC } from '../../models/Category.ts'
 
 export function useCategories() {
   const query = useQuery({
@@ -57,4 +58,16 @@ export function useUpdateCategory() {
       console.error('Failed to update category:', error) 
     },
   })
+}
+
+
+
+export function useFetchDesktopPCs(categoryId: number) {
+  return useQuery<DesktopPC[]>(['products', categoryId], async () => {
+    const response = await fetch(`/api/v1/products/category/${categoryId}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch products');
+    }
+    return response.json();
+  });
 }
