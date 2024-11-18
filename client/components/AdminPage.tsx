@@ -1,36 +1,20 @@
-import { useState } from 'react';
-import { useAddCategory } from '../hooks/useCategories'; 
+import { useCategories } from '../hooks/useCategories';
+import AddCategory from './AddCategory';
+import DeleteCategory from './DeleteCategory';
 
-const AdminPage = () => {
-  const addCategory = useAddCategory();
-  const [newCategory, setNewCategory] = useState({ name: '', description: '' });
+function AdminPage() {
+  const { data: categories, isLoading, isError } = useCategories();
 
-  const handleAddCategory = () => {
-    addCategory.mutate(newCategory, {
-      onSuccess: () => {
-        setNewCategory({ name: '', description: '' });
-      },
-    });
-  };
+  if (isLoading) return <p>Loading categories...</p>;
+  if (isError) return <p>Error fetching categories.</p>;
 
   return (
     <div>
-      <h2>Add New Category</h2>
-      <input
-        type="text"
-        placeholder="Name"
-        value={newCategory.name}
-        onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        value={newCategory.description}
-        onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
-      />
-      <button onClick={handleAddCategory}>Add Category</button>
+      <h2>Admin Dashboard</h2>
+      <AddCategory />
+      {categories && <DeleteCategory categories={categories} />}
     </div>
   );
-};
+}
 
 export default AdminPage;
