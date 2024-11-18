@@ -20,7 +20,6 @@ header a  {
 
 a  {
   text-decoration: none;
-  /* color: #000; */
   color: #2c3e50;
   transition: color 0.3s ease;
 }
@@ -29,9 +28,15 @@ a:hover {
   color: #000;
 }
 .categories:hover{
-  color:#0ed8b0
+  color:#0ed8d8
 }
-
+.deleteButton{
+  margin-right: 15px;
+}
+.categoryList{
+  list-style: none;
+  
+}
 header {
   display: flex;
   justify-content: space-between;
