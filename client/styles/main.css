@@ -20,7 +20,8 @@ header a  {
 
 a  {
   text-decoration: none;
-  color: #000;
+  /* color: #000; */
+  color: #2c3e50;
   transition: color 0.3s ease;
 }
 
@@ -28,7 +29,7 @@ a:hover {
   color: #000;
 }
 .categories:hover{
-  color:#409efc
+  color:#0ed8b0
 }
 
 header {
@@ -38,6 +39,8 @@ header {
   background-color: #2c3e50;
   color: #fff;
   border-bottom: 2px solid #34495e;
+  border-radius: 10px;
+
 }
 
 header h1 {
@@ -98,6 +101,7 @@ footer {
   color: #fff;
   display: flex;
   justify-content: space-between;
+  border-radius: 10px;
 }
 
 footer a {
