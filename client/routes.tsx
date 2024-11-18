@@ -1,20 +1,28 @@
 import { createRoutesFromElements, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Categories from './components/Categories';
-// import CategoryDetails from './components/CategoryDetails';
-// import ProductsList from './components/ProductsList';
-// import ProductDetails from './components/ProductDetails';
-// import NewProduct from './components/NewProduct';
+import AdminPage from './components/AdminPage';
+import Cart from './components/Cart';
+import Login from './components/Login';
+import Register from './components/Register';
+import ShopNow from './components/ShopNow';
+import NotFound from './components/NotFound';
+import Help from './components/Help';
+import Orders from './components/Orders';
+import Returns from './components/Returns';
 
 export default createRoutesFromElements(
   <Route path="/" element={<Layout />}>
-    {/* Categories Routes */}
     <Route index element={<Categories />} />
-    {/* <Route path="categories/:id" element={<CategoryDetails />} /> */}
-
-    {/* Products Routes */}
-    {/* <Route path="products" element={<ProductsList />} /> */}
-    {/* <Route path="products/:id" element={<ProductDetails />} /> */}
-    {/* <Route path="products/new" element={<NewProduct />} /> */}
+    <Route path="categories" element={<Categories />} />
+    <Route path="orders" element={<Orders />} />
+    <Route path="returns" element={<Returns />} />
+    <Route path="help" element={<Help />} />
+    <Route path="admin" element={<AdminPage />} />
+    <Route path="register" element={<Register />} />
+    <Route path="shop" element={<ShopNow />} />
+    <Route path="login" element={<Login />} />
+    <Route path="cart" element={<Cart />} />
+    <Route path="*" element={<NotFound />} />
   </Route>
 );
