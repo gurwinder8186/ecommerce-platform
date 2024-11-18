@@ -3,7 +3,11 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query'
-import { addCategory, fetchCategories, deleteCategoryById } from '../apis/productApi.ts'
+
+import { addCategory, fetchCategories, deleteCategoryById, updateCategory } from '../apis/productApi.ts'
+
+import { Category } from '../../models/Category.ts';
+
 
 export function  useCategories() {
   const query = useQuery({ queryKey: ['categories'], queryFn: () => fetchCategories(), });
@@ -34,6 +38,22 @@ export function useDeleteCategory() {
     },
     onError: (error) => {
       console.error('Error deleting category:', error);
+    },
+  });
+}
+
+
+
+export function useUpdateCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (category: { id: number; name: string; description?: string }) => updateCategory(category),  // Make sure to call updateCategory function here
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['categories'] });  // Invalidate the categories query to refetch after update
+    },
+    onError: (error) => {
+      console.error('Failed to update category:', error);  // Log error in case the update fails
     },
   });
 }
