@@ -1,5 +1,7 @@
 import { useCategories } from '../hooks/useCategories';
 import AddCategory from './AddCategory';
+import DesktopPCForm from './DesktopPCForm';
+import AddDesktopPC from './DesktopPCForm';
 import ManageCategory from './ManageCategory';
 
 function AdminPage() {
@@ -13,6 +15,14 @@ function AdminPage() {
       <h2>Admin Dashboard</h2>
       <AddCategory />
       {categories && <ManageCategory categories={categories} />}
+      <DesktopPCForm
+  onSubmit={(desktopPC) => {
+    console.log('Add Desktop PC:', desktopPC);
+    // Call API or handle state update here
+  }}
+  
+/>
+
          </div>
   );
 }
