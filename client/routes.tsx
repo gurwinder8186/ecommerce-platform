@@ -24,5 +24,7 @@ export default createRoutesFromElements(
     <Route path="login" element={<Login />} />
     <Route path="cart" element={<Cart />} />
     <Route path="*" element={<NotFound />} />
+   
+
   </Route>
 );

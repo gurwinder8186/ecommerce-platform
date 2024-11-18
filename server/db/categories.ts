@@ -32,3 +32,19 @@ export async function deleteCategoryById(id: number): Promise<number> {
   }
 }
 
+
+export async function updateCategoryById(
+  id: number,
+  category: { name: string; description?: string }
+): Promise<Category> {
+  try {
+    const [updatedCategory] = await connection('categories')
+      .where('id', id)
+      .update(category)
+      .returning('*'); 
+    return updatedCategory;
+  } catch (error) {
+    console.error('Error updating category in DB:', error);
+    throw error;
+  }
+}

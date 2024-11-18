@@ -57,6 +57,26 @@ router.delete('/:id', async (req, res) => {
 
 
 
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, description } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ error: 'Category name is required' });
+  }
+
+  try {
+    const updatedCategory = await db.updateCategoryById(Number(id), { name, description });
+    if (!updatedCategory) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+    res.status(200).json(updatedCategory);
+  } catch (error) {
+    console.error('Error updating category:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 
 export default router
