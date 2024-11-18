@@ -55,8 +55,6 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-
-
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { name, description } = req.body;
@@ -76,7 +74,5 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
-
 
 export default router

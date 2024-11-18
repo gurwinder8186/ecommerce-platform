@@ -4,8 +4,6 @@ import { Category } from '../../models/Category.ts'
 export async function getAllCategories(): Promise<Category[]> {
   const check= await connection('categories').select()
   return check;
-
-  
 }
 
 export async function addCategory(category: { name: string; description?: string }) {
@@ -31,7 +29,6 @@ export async function deleteCategoryById(id: number): Promise<number> {
     throw error;
   }
 }
-
 
 export async function updateCategoryById(
   id: number,
