@@ -18,3 +18,17 @@ export async function addCategory(category: { name: string; description?: string
     throw error;
   }
 }
+
+export async function deleteCategoryById(id: number): Promise<number> {
+  try {
+    const deletedCount = await connection('categories')
+      .where('id', id)
+      .del();
+
+    return deletedCount; 
+  } catch (error) {
+    console.error('Error deleting category from DB:', error);
+    throw error;
+  }
+}
+

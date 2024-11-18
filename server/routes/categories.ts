@@ -34,6 +34,28 @@ router.post('/', async (req, res) => {
 });
 
 
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Category ID is required' });
+  }
+
+  try {
+    const deletedCount = await db.deleteCategoryById(Number(id));
+
+    if (deletedCount === 0) {
+      return res.status(404).json({ message: 'Category not found' });
+    }
+
+    res.status(200).json({ message: `Category with ID ${id} deleted successfully` });
+  } catch (error) {
+    console.error('Error deleting category:', error);
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+});
+
+
 
 
 
