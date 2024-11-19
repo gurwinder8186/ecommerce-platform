@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useUpdateCategory, useDeleteCategory } from '../hooks/useCategories'; 
 import { Category } from '../../models/Category';

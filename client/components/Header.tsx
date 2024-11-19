@@ -12,7 +12,6 @@ function Header() {
       <button> 🔍</button>
     </div>
     <div className='link-container'>
-      <Link to="/shop"> ShopNow </Link>
       <Link to="/register"> Register </Link>
       <Link to="/login"> Login </Link>
       <Link to="/admin">Admin</Link>
