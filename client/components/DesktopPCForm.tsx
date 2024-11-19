@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { DesktopPC } from '../../models/DesktopPC';
+import React, { useState } from 'react'
+import { DesktopPC } from '../../models/DesktopPC'
 
 interface DesktopPCFormProps {
-  onSubmit: (desktopPC: DesktopPC) => void;
-  initialData?: Partial<DesktopPC>; // For pre-filling in case of editing
+  onSubmit: (desktopPC: DesktopPC) => void
+  initialData?: Partial<DesktopPC> // For pre-filling in case of editing
 }
 
 function validateDesktopPC(data: Partial<DesktopPC>): boolean {
@@ -16,37 +16,42 @@ function validateDesktopPC(data: Partial<DesktopPC>): boolean {
     !!data.specifications?.ram &&
     !!data.specifications?.storage &&
     !!data.specifications?.os
-  );
+  )
 }
 
-const DesktopPCForm: React.FC<DesktopPCFormProps> = ({ onSubmit, initialData = {} }) => {
-  const [desktopPC, setDesktopPC] = useState<Partial<DesktopPC>>(initialData);
-  const [error, setError] = useState<string | null>(null);
+const DesktopPCForm: React.FC<DesktopPCFormProps> = ({
+  onSubmit,
+  initialData = {},
+}) => {
+  const [desktopPC, setDesktopPC] = useState<Partial<DesktopPC>>(initialData)
+  const [error, setError] = useState<string | null>(null)
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const { name, value } = e.target;
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    const { name, value } = e.target
 
     if (name.includes('specifications.')) {
-      const key = name.split('.')[1];
+      const key = name.split('.')[1]
       setDesktopPC((prev) => ({
         ...prev,
         specifications: { ...prev.specifications, [key]: value },
-      }));
+      }))
     } else {
-      setDesktopPC((prev) => ({ ...prev, [name]: value }));
+      setDesktopPC((prev) => ({ ...prev, [name]: value }))
     }
   }
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!validateDesktopPC(desktopPC)) {
-      setError('Please fill out all required fields.');
-      return;
+      setError('Please fill out all required fields.')
+      return
     }
 
-    setError(null);
-    onSubmit(desktopPC as DesktopPC); // Cast because validation ensures it's complete
+    setError(null)
+    onSubmit(desktopPC as DesktopPC) // Cast because validation ensures it's complete
   }
 
   return (
@@ -84,10 +89,16 @@ const DesktopPCForm: React.FC<DesktopPCFormProps> = ({ onSubmit, initialData = {
           <label>
             Price:
             <input
-              type="number"
+              type="text" 
               name="price"
               value={desktopPC.price || ''}
-              onChange={handleChange}
+              onChange={(e) => {
+                const value = e.target.value
+                if (/^\d*$/.test(value)) {
+                  
+                  handleChange(e)
+                }
+              }}
               required
             />
           </label>
@@ -159,10 +170,12 @@ const DesktopPCForm: React.FC<DesktopPCFormProps> = ({ onSubmit, initialData = {
           </label>
         </div>
 
-        <button type="submit">{initialData.id ? 'Update' : 'Add'} Desktop PC</button>
+        <button type="submit">
+          {initialData.id ? 'Update' : 'Add'} Desktop PC
+        </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default DesktopPCForm;
+export default DesktopPCForm
